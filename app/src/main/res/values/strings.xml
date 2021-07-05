@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Praktyki</string>
+    <string name="exit_button">Wyjdź</string>
+    <string name="record_button">Nagraj</string>
+    <string name="search_button">Szukaj</string>
+    <string name="record_title">Record</string>
+    <string name="back">Wróć</string>
+    <string name="forward">Potwierdź</string>
+    <string name="summary">Podsumowanie</string>
+    <string name="name">Nazwa:</string>
+    <string name="sound_name">Nazwa dzwięku</string>
+    <string name="category">Kategorie:</string>
+    <string name="time">Czas:</string>
+    <string name="cancel">Anuluj</string>
+    <string name="microphone">Nagraj</string>
+    <string name="accept">Akceptuj</string>
+    <string name="next">Akceptuj</string>
+    <string name="play">Nagraj</string>
+    <string name="start">▶/⏸</string>
+    <string name="download">Pobierz</string>
+</resources>
