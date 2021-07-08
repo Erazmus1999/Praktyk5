@@ -11,6 +11,7 @@
         android:layout_height="72dp"
         android:onClick="runSearch"
         android:text="@string/back"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +22,8 @@
         android:id="@+id/Name_2"
         android:layout_width="101dp"
         android:layout_height="37dp"
+
+        android:background="#F9A825"
 
         android:text="@string/name"
         android:textAlignment="center"

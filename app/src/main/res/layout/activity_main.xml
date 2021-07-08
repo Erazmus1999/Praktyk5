@@ -5,48 +5,55 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
+    android:background="@drawable/gradient_list"
     app:layoutDescription="@xml/activity_main_scene"
     tools:context=".MainActivity">
 
-    <LinearLayout
+
+    <ImageButton
+        android:id="@+id/RecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/Record"
+        app:layout_constraintBottom_toTopOf="@+id/space"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.356"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/mic_foreground"
+        />
 
-        <Button
-            android:id="@+id/record_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="144dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="20dp"
-            android:onClick="runRecord"
-            android:text="@string/record_button" />
+    <Chronometer
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/RecordButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
+        />
 
-        <Button
-            android:id="@+id/search_button"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="144dp"
-
-            android:layout_height="62dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:duplicateParentState="false"
-            android:onClick="runSearch"
-            android:text="@string/search_button" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/exit_button"
-        android:layout_width="265dp"
-        android:layout_height="108dp"
-        android:text="@string/exit_button"
+    <ImageButton
+        android:id="@+id/SearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/Search"
+        android:onClick="goToSearching"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:srcCompat="@mipmap/search_foreground" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="194dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

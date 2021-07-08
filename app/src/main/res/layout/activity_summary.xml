@@ -19,7 +19,8 @@
         app:layout_constraintHorizontal_bias="0.868"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.222"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/Title"
@@ -132,10 +133,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.339" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/Text_Input"
         android:layout_width="210dp"
         android:layout_height="45dp"
+        android:clickable="false"
+        android:editable="false"
         android:ems="10"
         android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/Accept"
