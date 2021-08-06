@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "981954002634",
+    "firebase_url": "https://praktyki-8910b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "praktyki-8910b",
+    "storage_bucket": "praktyki-8910b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981954002634:android:7c967e5f325b45b3f7fe33",
+        "android_client_info": {
+          "package_name": "pollub.ism.praktyki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981954002634-etq9m75r0eetdisvdovru7fe8qsn5on7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIddpKvWRvnrmpmnsqVS7AS8lfMzPMc8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981954002634-etq9m75r0eetdisvdovru7fe8qsn5on7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

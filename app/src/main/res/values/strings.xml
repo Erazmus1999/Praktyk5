@@ -21,6 +21,8 @@
     <string name="Record">Record</string>
     <string name="Search">Search</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="Save">Save</string>
+    <string name="hint">Wpisz nazwe pliku na serwerze</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

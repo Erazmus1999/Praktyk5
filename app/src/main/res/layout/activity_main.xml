@@ -9,6 +9,8 @@
     app:layoutDescription="@xml/activity_main_scene"
     tools:context=".MainActivity">
 
+    <include
+        layout="@layout/appbar"/>
 
     <ImageButton
         android:id="@+id/RecordButton"
@@ -16,44 +18,21 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/Record"
-        app:layout_constraintBottom_toTopOf="@+id/space"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/mic_foreground"
-        />
+        app:srcCompat="@mipmap/mic_foreground" />
 
     <Chronometer
         android:id="@+id/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:textSize="60sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/RecordButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"
-        />
-
-    <ImageButton
-        android:id="@+id/SearchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/Search"
-        android:onClick="goToSearching"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space"
-        app:srcCompat="@mipmap/search_foreground" />
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="194dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

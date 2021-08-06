@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="Asortyment">
+
+        <item> Odgłosy zwierząt </item>
+        <item> Dźwięki kuchenne </item>
+        <item> Odgłosy natury </item>
+        <item> Samochody </item>
+        <item> Rozmowa </item>
+        <item> Inne </item>
+
+    </string-array>
+
+</resources>
