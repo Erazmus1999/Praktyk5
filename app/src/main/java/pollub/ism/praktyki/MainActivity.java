@@ -28,6 +28,8 @@ import android.widget.ImageButton;
 import android.content.Intent;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
 
 
+
         recordButton();
     }
 
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.search:
                 Intent myIntent = new Intent(this, SearchActivity.class);
                 startActivity(myIntent);
+
                 break;
         }
         return super.onOptionsItemSelected(item);

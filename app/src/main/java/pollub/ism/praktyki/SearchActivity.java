@@ -4,25 +4,43 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
+import android.widget.ListAdapter;
+
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private RecyclerView recyclerView;
+    private ListView listView;
+    private ArrayList<String> arrayList;
+    private StorageReference listRef;
+    private ListAdapter listAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +53,18 @@ public class SearchActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(6000);
         animationDrawable.start();
 
-
-        toolbar=findViewById(R.id.myToolBar);
+        toolbar = findViewById(R.id.myToolBar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        DataProvider dostawca = new DataProvider(FirebaseStorage.getInstance().getReference().child("Audio"));
+        recyclerView = findViewById(R.id.recyclerView);
+        OurAdapter adapter = new OurAdapter(this, dostawca);
 
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -73,32 +95,67 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.search:
                 Toast.makeText(this, "Search is pressed", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-    public void play_Song(View v)
-    {
+
+    public void play_Song(View v) throws IOException {
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/praktyki-8910b.appspot.com/o/Audio%2FD%C5%BAwi%C4%99ki%20kuchenne%2FK.mp3?alt=media&token=abc5b3e9-6532-44f6-b884-6edbdbd55d95"); //URL
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener()
-            {
+            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/praktyki-8910b.appspot.com/o/Audio%2FSamochody%2Fijo%20ijo.mp3?alt=media&token=ed3e425e-f820-41d8-923d-307e64857617"); //URL
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
-                public void onPrepared(MediaPlayer mp)
-                {
+                public void onPrepared(MediaPlayer mp) {
                     mp.start();
                 }
             });
 
             mediaPlayer.prepare();
-        }catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    };
+
+
+        StorageReference storage = FirebaseStorage.getInstance().getReference();
+        StorageReference storageRef = storage.child("Audio").child("Samochody").child("ijo ijo.mp3");
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                final String x = uri.toString();
+                Toast.makeText(SearchActivity.this, x, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        //recyclerView.setAdapter(adapter);
+
+/*
+        File localFile =File.createTempFile("rec", "mp3");
+
+        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                File f = new File(getExternalFilesDir("/").getAbsolutePath(), "rec.mp3");
+
+
+
+                Toast.makeText(SearchActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(SearchActivity.this, "FAIL!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+         */
+
+
+
+    }
 }

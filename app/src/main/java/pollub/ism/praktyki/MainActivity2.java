@@ -120,9 +120,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 mProgress.dismiss();
-
-                //Toast.makeText(MainActivity2.this, "Uploading finished!", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(MainActivity2.this, "Uploading finished!", Toast.LENGTH_SHORT).show();
             }
         });
     }
