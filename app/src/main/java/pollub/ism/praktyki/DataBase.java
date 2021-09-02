@@ -20,7 +20,7 @@ public class DataBase extends AppCompatActivity
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
             @Override
-                    public void onPrepared(MediaPlayer mp)
+            public void onPrepared(MediaPlayer mp)
             {
                 mp.start();
             }

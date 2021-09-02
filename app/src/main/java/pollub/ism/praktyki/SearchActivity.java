@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
@@ -59,12 +58,12 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        DataProvider dostawca = new DataProvider(FirebaseStorage.getInstance().getReference().child("Audio"));
+        OurAdapter adapter = new OurAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
-        OurAdapter adapter = new OurAdapter(this, dostawca);
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DataProvider dostawca = new DataProvider(FirebaseStorage.getInstance().getReference().child("Audio"), adapter);
+
     }
 
     @Override
@@ -106,7 +105,7 @@ public class SearchActivity extends AppCompatActivity {
     public void play_Song(View v) throws IOException {
         MediaPlayer mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/praktyki-8910b.appspot.com/o/Audio%2FSamochody%2Fijo%20ijo.mp3?alt=media&token=ed3e425e-f820-41d8-923d-307e64857617"); //URL
+            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/praktyki-8910b.appspot.com/o/Audio%2FSamochody%2Fautko.mp3?alt=media&token=45fec636-93f5-4b92-adaa-f78ec64eb670"); //URL
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
@@ -121,7 +120,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         StorageReference storage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageRef = storage.child("Audio").child("Samochody").child("ijo ijo.mp3");
+        StorageReference storageRef = storage.child("Audio").child("Samochody").child("autko.mp3");
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -158,4 +157,5 @@ public class SearchActivity extends AppCompatActivity {
 
 
     }
+
 }

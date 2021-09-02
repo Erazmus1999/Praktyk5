@@ -99,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void runMain(View view){
-        setContentView(R.layout.activity_main);
-        recordButton();
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     public void recordButton()
     {
@@ -232,12 +227,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return a;
     }
-
-
 }
-
-
-
-
-
-

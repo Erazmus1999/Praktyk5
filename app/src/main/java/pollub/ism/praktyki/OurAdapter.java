@@ -1,22 +1,31 @@
 package pollub.ism.praktyki;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.ByteArrayOutputStream;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
 
+public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
+    public final String TAG = "XD";
+    public ArrayList<DaneAdaptera> daneAdaptera;
+    public String helper;
     public static class DaneAdaptera {
         public final  String nazwa;
 
@@ -26,7 +35,14 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
     }
 
     public interface DataProvider{
-        ArrayList<DaneAdaptera> getDane();
+
+        //ArrayList<DaneAdaptera> getDane();
+    }
+
+    public void setDane(ArrayList<DaneAdaptera> a)
+    {
+        daneAdaptera = a;
+        notifyDataSetChanged();
     }
 
     class OurHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -40,10 +56,38 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
             itemView.setOnClickListener(this);
         }
 
-        @Override
+       @Override
         public void onClick(View view) {
-            DaneAdaptera danePozycji = dostawca.getDane().get(getLayoutPosition());
+            DaneAdaptera danePozycji = daneAdaptera.get(getLayoutPosition());
+            if (danePozycji.nazwa.equals("Samochody") || danePozycji.nazwa.equals("Odgłosy zwierząt")  || danePozycji.nazwa.equals("Inne") || danePozycji.nazwa.equals("Odgłosy natury") || danePozycji.nazwa.equals("Dźwięki kuchenne") || danePozycji.nazwa.equals("Rozmowa") ) {
+                helper = danePozycji.nazwa;
+                pollub.ism.praktyki.DataProvider dostawca = new pollub.ism.praktyki.DataProvider(FirebaseStorage.getInstance().getReference().child("Audio").child(danePozycji.nazwa), adapter);
+            }
+            else
+            {
+                StorageReference storage = FirebaseStorage.getInstance().getReference();
+                StorageReference storageRef = storage.child("Audio").child(helper).child(danePozycji.nazwa);
+                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        MediaPlayer mediaPlayer = new MediaPlayer();
+                        try {
+                            mediaPlayer.setDataSource(uri.toString()); //URL
+                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mp) {
+                                    mp.start();
+                                }
+                            });
 
+                            mediaPlayer.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
         }
 
     }
@@ -51,13 +95,12 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
     //-------------------------------------------------------------------------------
 
     private final Context kontekst;
-    private final DataProvider dostawca;
     private LayoutInflater inflater;
 
-    public OurAdapter(Context kontekst, DataProvider dostawca){
+    public OurAdapter(Context kontekst){
         this.kontekst = kontekst;
         this.inflater = LayoutInflater.from(kontekst);
-        this.dostawca = dostawca;
+
     }
 
 
@@ -70,13 +113,16 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.OurHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull OurHolder holder, int position) {
-        DaneAdaptera dane = dostawca.getDane().get(position);
+        DaneAdaptera dane = daneAdaptera.get(position);
         holder.nazwaLista.setText(dane.nazwa);
     }
 
     @Override
     public int getItemCount() {
-        return dostawca.getDane().size();
+        if (daneAdaptera == null)
+            return 0;
+        else
+            return daneAdaptera.size();
     }
 
 }

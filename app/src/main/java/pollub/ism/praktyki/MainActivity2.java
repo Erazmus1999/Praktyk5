@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +38,6 @@ public class MainActivity2 extends AppCompatActivity {
 
         adapter = ArrayAdapter.createFromResource(this, R.array.Asortyment, android.R.layout.simple_dropdown_item_1line);
         binding.spinner.setAdapter(adapter);
-
-
 
         mStorage = FirebaseStorage.getInstance().getReference();
         mProgress = new ProgressDialog(this);
@@ -106,7 +103,6 @@ public class MainActivity2 extends AppCompatActivity {
         {
             Toast.makeText(this, "Nie wpisano nazwy nagrania!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void uploadAudio()
@@ -124,5 +120,4 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
-
 }
